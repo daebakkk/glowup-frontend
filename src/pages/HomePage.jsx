@@ -35,7 +35,7 @@ const NAV_CARDS = [
     description: "Set reminders for your morning and evening skincare routine",
     icon: <CalendarIcon />,
     iconBg: "bg-pink-100",
-    page: null,
+    page: "reminders",
   },
   {
     id: "contact",

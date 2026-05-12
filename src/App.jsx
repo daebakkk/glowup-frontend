@@ -3,6 +3,7 @@ import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import SkinProfilePage from "./pages/SkinProfilePage";
 import RecommendationsPage from "./pages/RecommendationsPage";
+import RemindersPage from "./pages/RemindersPage";
 
 export default function App() {
   const [page, setPage] = useState("auth");
@@ -12,6 +13,10 @@ export default function App() {
     if (data?.skinType !== undefined) setProfile(data);
     setPage(destination);
   };
+
+  if (page === "reminders") {
+    return <RemindersPage onHome={() => setPage("home")} />;
+  }
 
   if (page === "home") {
     return (
