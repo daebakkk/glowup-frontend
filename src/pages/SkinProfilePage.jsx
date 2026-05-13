@@ -44,7 +44,7 @@ const SKIN_CONCERNS = [
   { id: "texture", label: "Uneven Texture" },
 ];
 
-export default function SkinProfilePage({ onViewRecommendations }) {
+export default function SkinProfilePage({ onViewRecommendations, onHome }) {
   const [mode, setMode] = useState("edit"); // "edit" | "view"
   const [skinType, setSkinType] = useState(null);
   const [concerns, setConcerns] = useState([]);
@@ -93,7 +93,7 @@ export default function SkinProfilePage({ onViewRecommendations }) {
     >
       {/* Top nav */}
       <nav className="flex items-center gap-2 px-6 py-4">
-        <button className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition">
+        <button onClick={onHome} className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition">
           <HomeIcon />
           Home
         </button>

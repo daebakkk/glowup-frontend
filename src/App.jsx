@@ -29,6 +29,7 @@ export default function App() {
   if (page === "skinProfile") {
     return (
       <SkinProfilePage
+        onHome={() => setPage("home")}
         onViewRecommendations={(data) => navigate("recommendations", data)}
       />
     );
