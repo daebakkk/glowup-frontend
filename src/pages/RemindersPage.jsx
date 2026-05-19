@@ -6,26 +6,19 @@ const EVENING_STEPS = ["Cleanser", "Toner", "Treatment/Serum", "Eye Cream", "Nig
 export default function RemindersPage({ onHome }) {
   const [morning, setMorning] = useState({ active: false, time: "08:00" });
   const [evening, setEvening] = useState({ active: false, time: "22:00" });
-  const [notifStatus, setNotifStatus] = useState(null);
 
   const toggleRoutine = async (setter) => {
-    if (!("Notification" in window)) return;
+    if (!("Notification" in window)) {
+      // fallback: just toggle without notifications
+      setter((prev) => ({ ...prev, active: !prev.active }));
+      return;
+    }
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
       setter((prev) => ({ ...prev, active: !prev.active }));
-    }
-  };
-
-  const sendTest = async () => {
-    if (!("Notification" in window)) return;
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      new Notification("Glow Up Reminder", {
-        body: "Time for your skincare routine!",
-      });
-      setNotifStatus("sent");
     } else {
-      setNotifStatus("denied");
+      // still toggle visually even if denied — user can see the state
+      setter((prev) => ({ ...prev, active: !prev.active }));
     }
   };
 
@@ -98,29 +91,6 @@ export default function RemindersPage({ onHome }) {
           onToggle={() => toggleRoutine(setEvening)}
           onTimeChange={(t) => setEvening((p) => ({ ...p, time: t }))}
         />
-
-        {/* Test Notifications */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-          <p className="text-sm font-bold text-gray-800 mb-1">Test Notifications</p>
-          <p className="text-xs text-gray-500 mb-4">
-            Send a test notification to make sure everything is working
-          </p>
-          <button
-            onClick={sendTest}
-            className="flex items-center gap-2 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
-          >
-            <BellIcon />
-            Send Test Notification
-          </button>
-          {notifStatus === "sent" && (
-            <p className="text-xs text-green-500 mt-2">Test notification sent!</p>
-          )}
-          {notifStatus === "denied" && (
-            <p className="text-xs text-red-400 mt-2">
-              Notifications blocked. Please enable them in your browser settings.
-            </p>
-          )}
-        </div>
       </div>
     </div>
   );
@@ -137,13 +107,15 @@ function RoutineCard({ label, icon, routine, steps, onToggle, onTimeChange }) {
             <p className="text-xs text-gray-400">{routine.active ? "Active" : "Inactive"}</p>
           </div>
         </div>
-        {/* Toggle */}
+        {/* Toggle switch */}
         <button
           onClick={onToggle}
-          className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none ${
-            routine.active ? "bg-pink-400" : "bg-gray-200"
-          }`}
+          role="switch"
+          aria-checked={routine.active}
           aria-label={`Toggle ${label}`}
+          className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 ${
+            routine.active ? "bg-pink-500" : "bg-gray-200"
+          }`}
         >
           <span
             className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
@@ -192,7 +164,6 @@ function HomeIcon() {
     </svg>
   );
 }
-
 function CalendarIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -201,7 +172,6 @@ function CalendarIcon() {
     </svg>
   );
 }
-
 function SunIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -210,7 +180,6 @@ function SunIcon() {
     </svg>
   );
 }
-
 function MoonIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -218,7 +187,6 @@ function MoonIcon() {
     </svg>
   );
 }
-
 function ClockIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -227,7 +195,6 @@ function ClockIcon() {
     </svg>
   );
 }
-
 function BellIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -236,7 +203,6 @@ function BellIcon() {
     </svg>
   );
 }
-
 function InfoIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5">

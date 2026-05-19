@@ -231,10 +231,13 @@ function GradientButton({ label }) {
   return (
     <button
       type="submit"
-      className="w-full py-3.5 rounded-2xl text-white font-semibold text-sm mt-2 transition-opacity hover:opacity-90 active:opacity-80"
+      className="w-full py-3.5 rounded-2xl text-white font-semibold text-sm mt-2 active:opacity-90"
       style={{
-        background: "linear-gradient(90deg, #f472b6 0%, #818cf8 100%)",
+        background: "linear-gradient(90deg, #db2777 0%, #6366f1 100%)",
+        transition: "filter 0.2s",
       }}
+      onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.15)")}
+      onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
     >
       {label}
     </button>

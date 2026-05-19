@@ -4,6 +4,10 @@ import HomePage from "./pages/HomePage";
 import SkinProfilePage from "./pages/SkinProfilePage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 import RemindersPage from "./pages/RemindersPage";
+import DailyRoutinePage from "./pages/DailyRoutinePage";
+import ContactPage from "./pages/ContactPage";
+import TopMatchesPage from "./pages/TopMatchesPage";
+import ForYouPage from "./pages/ForYouPage";
 
 export default function App() {
   const [page, setPage] = useState("auth");
@@ -13,6 +17,22 @@ export default function App() {
     if (data?.skinType !== undefined) setProfile(data);
     setPage(destination);
   };
+
+  if (page === "forYou") {
+    return <ForYouPage onHome={() => setPage("home")} />;
+  }
+
+  if (page === "topMatches") {
+    return <TopMatchesPage profile={profile} onHome={() => setPage("home")} />;
+  }
+
+  if (page === "contact") {
+    return <ContactPage onHome={() => setPage("home")} />;
+  }
+
+  if (page === "dailyRoutine") {
+    return <DailyRoutinePage onHome={() => setPage("home")} />;
+  }
 
   if (page === "reminders") {
     return <RemindersPage onHome={() => setPage("home")} />;

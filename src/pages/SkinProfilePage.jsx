@@ -92,7 +92,7 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
       }}
     >
       {/* Top nav */}
-      <nav className="flex items-center gap-2 px-6 py-4">
+      <nav className="flex items-center gap-2 px-8 py-5">
         <button onClick={onHome} className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition">
           <HomeIcon />
           Home
@@ -103,12 +103,12 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
       </nav>
 
       {/* Page header */}
-      <div className="px-6 pt-4 pb-4 max-w-2xl mx-auto flex items-start justify-between">
+      <div className="px-8 pt-4 pb-4 max-w-3xl mx-auto flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-1">
             <UserIcon />
             <h1
-              className="text-3xl font-bold"
+              className="text-4xl font-bold"
               style={{
                 background: "linear-gradient(90deg, #ec4899, #8b5cf6)",
                 WebkitBackgroundClip: "text",
@@ -137,16 +137,16 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
         )}
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 pb-16 space-y-4">
+      <div className="max-w-3xl mx-auto px-8 pb-16 space-y-4">
         {/* ── EDIT MODE ─────────────────────────────────────── */}
         {mode === "edit" && (
           <>
             {/* Skin type card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
               <h2 className="text-lg font-bold text-gray-800 mb-1">
                 What's your skin type?
               </h2>
-              <p className="text-sm text-gray-400 mb-5">
+              <p className="text-base text-gray-400 mb-5">
                 Select the option that best describes your skin
               </p>
 
@@ -204,11 +204,11 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
 
             {/* Skin concerns card — only visible after a skin type is selected */}
             {skinType && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
                 <h2 className="text-lg font-bold text-gray-800 mb-1">
                   What are your skin concerns?
                 </h2>
-                <p className="text-sm text-gray-400 mb-5">Select all that apply</p>
+                <p className="text-base text-gray-400 mb-5">Select all that apply</p>
 
                 <div className="grid grid-cols-2 gap-3">
                   {SKIN_CONCERNS.map((concern) => {
@@ -259,10 +259,13 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
               <div className="fixed bottom-6 right-6 z-20">
                 <button
                   onClick={handleSaveProfile}
-                  className="flex items-center gap-2 px-6 py-3 rounded-2xl text-white font-semibold text-sm shadow-lg transition-opacity hover:opacity-90 active:opacity-80"
+                  className="flex items-center gap-2 px-6 py-3 rounded-2xl text-white font-semibold text-sm shadow-lg active:opacity-90"
                   style={{
-                    background: "linear-gradient(90deg, #f472b6 0%, #818cf8 100%)",
+                    background: "linear-gradient(90deg, #db2777 0%, #6366f1 100%)",
+                    transition: "filter 0.2s",
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.15)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
                 >
                   <SaveIcon />
                   Save Profile
@@ -276,18 +279,18 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
         {mode === "view" && (
           <>
             {/* Skin Type card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <p className="text-sm font-bold text-gray-800 mb-0.5">Skin Type</p>
-              <p className="text-xs text-gray-400 mb-4">Your current skin type</p>
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+              <p className="text-base font-bold text-gray-800 mb-0.5">Skin Type</p>
+              <p className="text-sm text-gray-400 mb-4">Your current skin type</p>
               <span className="inline-block bg-blue-100 text-blue-600 text-sm font-semibold px-4 py-1.5 rounded-xl">
                 {selectedSkinType?.label}
               </span>
             </div>
 
             {/* Skin Concerns card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <p className="text-sm font-bold text-gray-800 mb-0.5">Skin Concerns</p>
-              <p className="text-xs text-gray-400 mb-4">Issues you want to address</p>
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+              <p className="text-base font-bold text-gray-800 mb-0.5">Skin Concerns</p>
+              <p className="text-sm text-gray-400 mb-4">Issues you want to address</p>
               {selectedConcernLabels.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {selectedConcernLabels.map((label) => (
@@ -305,11 +308,11 @@ export default function SkinProfilePage({ onViewRecommendations, onHome }) {
             </div>
 
             {/* Ready for Recommendations card */}
-            <div className="bg-blue-50 rounded-2xl border border-blue-100 p-6">
-              <p className="text-sm font-bold text-gray-800 mb-1">
+            <div className="bg-blue-50 rounded-2xl border border-blue-100 p-8">
+              <p className="text-base font-bold text-gray-800 mb-1">
                 Ready for Recommendations?
               </p>
-              <p className="text-xs text-gray-500 mb-4">
+              <p className="text-sm text-gray-500 mb-4">
                 Based on your profile, we can suggest products tailored to your needs
               </p>
               <button

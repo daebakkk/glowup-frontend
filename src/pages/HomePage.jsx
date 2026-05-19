@@ -27,7 +27,7 @@ const NAV_CARDS = [
     description: "Browse all skincare products with detailed information",
     icon: <SparkleCardIcon />,
     iconBg: "bg-blue-100",
-    page: "recommendations",
+    page: "forYou",
   },
   {
     id: "reminders",
@@ -43,7 +43,7 @@ const NAV_CARDS = [
     description: "Have questions? Send us an email",
     icon: <MailIcon />,
     iconBg: "bg-blue-100",
-    page: null,
+    page: "contact",
   },
   {
     id: "daily-routine",
@@ -51,7 +51,7 @@ const NAV_CARDS = [
     description: "View recommended daily skincare steps",
     icon: <ClockIcon />,
     iconBg: "bg-pink-100",
-    page: null,
+    page: "dailyRoutine",
   },
   {
     id: "top-matches",
@@ -59,7 +59,7 @@ const NAV_CARDS = [
     description: "Complete your profile to see top product matches",
     icon: <BadgeIcon />,
     iconBg: "bg-blue-100",
-    page: null,
+    page: "topMatches",
   },
 ];
 
@@ -89,13 +89,13 @@ export default function HomePage({ onNavigate }) {
           "linear-gradient(135deg, #fdf2f8 0%, #f5f0ff 50%, #e0f2fe 100%)",
       }}
     >
-      <div className="max-w-3xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-8 py-12">
         {/* Header */}
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-3 mb-3">
             <SparkleHeaderIcon />
             <h1
-              className="text-4xl font-bold"
+              className="text-5xl font-bold"
               style={{
                 background: "linear-gradient(90deg, #ec4899, #8b5cf6)",
                 WebkitBackgroundClip: "text",
@@ -105,14 +105,14 @@ export default function HomePage({ onNavigate }) {
               Skincare Hub
             </h1>
           </div>
-          <p className="text-gray-500 text-sm leading-relaxed max-w-md mx-auto">
+          <p className="text-gray-500 text-base leading-relaxed max-w-md mx-auto">
             Your personalized skincare companion — get recommendations, set
             reminders, and discover products tailored to your skin.
           </p>
         </div>
 
         {/* Search card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-6">
           <p className="text-center text-xs font-semibold tracking-[0.2em] text-pink-500 uppercase mb-4">
             Search by Skin Concern
           </p>
@@ -130,10 +130,13 @@ export default function HomePage({ onNavigate }) {
             </div>
             <button
               type="submit"
-              className="px-5 py-3 rounded-xl text-white text-sm font-semibold flex-shrink-0 transition-opacity hover:opacity-90 active:opacity-80"
+              className="px-5 py-3 rounded-xl text-white text-sm font-semibold flex-shrink-0 active:opacity-90"
               style={{
-                background: "linear-gradient(90deg, #f472b6 0%, #818cf8 100%)",
+                background: "linear-gradient(90deg, #db2777 0%, #6366f1 100%)",
+                transition: "filter 0.2s",
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.15)")}
+              onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
             >
               Find Products
             </button>
@@ -159,23 +162,23 @@ export default function HomePage({ onNavigate }) {
         </div>
 
         {/* Nav cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
           {NAV_CARDS.map((card) => (
             <button
               key={card.id}
               onClick={() => card.page && onNavigate?.(card.page)}
-              className="flex items-start gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-left hover:shadow-md hover:border-pink-100 transition-all group"
+              className="flex items-start gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-left hover:shadow-md hover:border-pink-100 transition-all group"
             >
               <div
-                className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${card.iconBg}`}
+                className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${card.iconBg}`}
               >
                 {card.icon}
               </div>
               <div>
-                <p className="text-sm font-bold text-gray-800 mb-1 group-hover:text-pink-500 transition-colors">
+                <p className="text-base font-bold text-gray-800 mb-1 group-hover:text-pink-500 transition-colors">
                   {card.title}
                 </p>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-sm text-gray-400 leading-relaxed">
                   {card.description}
                 </p>
               </div>
@@ -184,14 +187,14 @@ export default function HomePage({ onNavigate }) {
         </div>
 
         {/* Daily tips card */}
-        <div className="bg-pink-50 rounded-2xl border border-pink-100 p-6">
+        <div className="bg-pink-50 rounded-2xl border border-pink-100 p-8">
           <div className="flex items-center gap-2 mb-4">
             <BookIcon />
             <p className="text-sm font-bold text-gray-800">Daily Skincare Tips</p>
           </div>
           <ul className="space-y-2">
             {DAILY_TIPS.map((tip, i) => (
-              <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+              <li key={i} className="text-base text-gray-600 flex items-start gap-2">
                 <span className="text-pink-400 mt-0.5">•</span>
                 {tip}
               </li>

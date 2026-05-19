@@ -92,7 +92,7 @@ export default function RecommendationsPage({ profile = {}, onEditProfile, onHom
       }}
     >
       {/* Top nav */}
-      <nav className="flex items-center gap-2 px-6 py-4">
+      <nav className="flex items-center gap-2 px-8 py-5">
         <button
           onClick={onHome}
           className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition"
@@ -106,12 +106,12 @@ export default function RecommendationsPage({ profile = {}, onEditProfile, onHom
       </nav>
 
       {/* Page header */}
-      <div className="px-6 pt-2 pb-6 max-w-5xl mx-auto flex items-start justify-between">
+      <div className="px-8 pt-2 pb-6 max-w-5xl mx-auto flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-1">
             <SparkleIcon />
             <h1
-              className="text-3xl font-bold"
+              className="text-4xl font-bold"
               style={{
                 background: "linear-gradient(90deg, #ec4899, #8b5cf6)",
                 WebkitBackgroundClip: "text",
@@ -121,7 +121,7 @@ export default function RecommendationsPage({ profile = {}, onEditProfile, onHom
               Your Personalized Routine
             </h1>
           </div>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-gray-500 text-base mt-1">
             {ALL_PRODUCTS.length} products recommended for{" "}
             <span className="capitalize">{skinType}</span> skin targeting{" "}
             {concernCount} concern{concernCount !== 1 ? "s" : ""}
@@ -138,7 +138,7 @@ export default function RecommendationsPage({ profile = {}, onEditProfile, onHom
       </div>
 
       {/* Product grid */}
-      <div className="max-w-5xl mx-auto px-6 pb-16">
+      <div className="max-w-5xl mx-auto px-8 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ALL_PRODUCTS.map((product) => (
             <ProductCard
@@ -160,7 +160,7 @@ function ProductCard({ product, why }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
       {/* Image */}
-      <div className="w-full h-56 bg-gray-100 overflow-hidden flex-shrink-0">
+      <div className="w-full h-64 bg-gray-100 overflow-hidden flex-shrink-0">
         {!imgError ? (
           <img
             src={product.image}
@@ -176,7 +176,7 @@ function ProductCard({ product, why }) {
       </div>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-6 flex flex-col flex-1">
         {/* Name + category badge */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <h3 className="text-base font-bold text-gray-800 leading-snug">
@@ -188,7 +188,7 @@ function ProductCard({ product, why }) {
         </div>
 
         {/* Description */}
-        <p className="text-sm text-gray-500 leading-relaxed mb-4">
+        <p className="text-base text-gray-500 leading-relaxed mb-4">
           {product.description}
         </p>
 
