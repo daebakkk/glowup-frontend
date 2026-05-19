@@ -40,12 +40,12 @@ export default function RemindersPage({ onHome }) {
         <span className="text-pink-500 text-sm font-medium">Reminders</span>
       </nav>
 
-      <div className="max-w-2xl mx-auto px-6 pb-16 space-y-4">
-        <div className="pt-2 pb-2">
-          <div className="flex items-center gap-3 mb-1">
+      <div className="max-w-4xl mx-auto px-8 pb-16 space-y-6">
+        <div className="pt-4 pb-2">
+          <div className="flex items-center gap-3 mb-2">
             <CalendarIcon />
             <h1
-              className="text-3xl font-bold"
+              className="text-4xl font-bold"
               style={{
                 background: "linear-gradient(90deg, #ec4899, #8b5cf6)",
                 WebkitBackgroundClip: "text",
@@ -55,42 +55,42 @@ export default function RemindersPage({ onHome }) {
               Routine Reminders
             </h1>
           </div>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-base">
             Set up daily reminders to maintain a consistent skincare routine
           </p>
         </div>
 
         {/* Browser notifications info banner */}
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl px-5 py-4 flex gap-3">
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl px-6 py-5 flex gap-4">
           <InfoIcon />
           <div>
-            <p className="text-sm font-semibold text-gray-800 mb-0.5">Browser Notifications</p>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-base font-semibold text-gray-800 mb-1">Browser Notifications</p>
+            <p className="text-sm text-gray-500 leading-relaxed">
               Enable browser notifications to receive reminders at your scheduled times.
               Click "Enable" on the notification permission prompt when it appears.
             </p>
           </div>
         </div>
 
-        {/* Morning Routine */}
-        <RoutineCard
-          label="Morning Routine"
-          icon={<SunIcon />}
-          routine={morning}
-          steps={MORNING_STEPS}
-          onToggle={() => toggleRoutine(setMorning)}
-          onTimeChange={(t) => setMorning((p) => ({ ...p, time: t }))}
-        />
-
-        {/* Evening Routine */}
-        <RoutineCard
-          label="Evening Routine"
-          icon={<MoonIcon />}
-          routine={evening}
-          steps={EVENING_STEPS}
-          onToggle={() => toggleRoutine(setEvening)}
-          onTimeChange={(t) => setEvening((p) => ({ ...p, time: t }))}
-        />
+        {/* Morning + Evening stacked */}
+        <div className="space-y-6">
+          <RoutineCard
+            label="Morning Routine"
+            icon={<SunIcon />}
+            routine={morning}
+            steps={MORNING_STEPS}
+            onToggle={() => toggleRoutine(setMorning)}
+            onTimeChange={(t) => setMorning((p) => ({ ...p, time: t }))}
+          />
+          <RoutineCard
+            label="Evening Routine"
+            icon={<MoonIcon />}
+            routine={evening}
+            steps={EVENING_STEPS}
+            onToggle={() => toggleRoutine(setEvening)}
+            onTimeChange={(t) => setEvening((p) => ({ ...p, time: t }))}
+          />
+        </div>
       </div>
     </div>
   );
@@ -98,13 +98,13 @@ export default function RemindersPage({ onHome }) {
 
 function RoutineCard({ label, icon, routine, steps, onToggle, onTimeChange }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-      <div className="flex items-start justify-between mb-5">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 h-full">
+      <div className="flex items-start justify-between mb-6">
         <div className="flex items-center gap-3">
           {icon}
           <div>
-            <p className="text-base font-bold text-gray-800">{label}</p>
-            <p className="text-xs text-gray-400">{routine.active ? "Active" : "Inactive"}</p>
+            <p className="text-lg font-bold text-gray-800">{label}</p>
+            <p className="text-sm text-gray-400">{routine.active ? "Active" : "Inactive"}</p>
           </div>
         </div>
         {/* Toggle switch */}
@@ -125,26 +125,26 @@ function RoutineCard({ label, icon, routine, steps, onToggle, onTimeChange }) {
         </button>
       </div>
 
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-6">
         <ClockIcon />
         <span className="text-sm font-semibold text-gray-700">Reminder Time:</span>
         <input
           type="time"
           value={routine.time}
           onChange={(e) => onTimeChange(e.target.value)}
-          className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-200"
+          className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-200"
         />
       </div>
 
       <div className="flex items-start gap-3">
         <BellIcon />
         <div>
-          <p className="text-sm font-semibold text-gray-700 mb-2">Routine Steps:</p>
+          <p className="text-sm font-semibold text-gray-700 mb-3">Routine Steps:</p>
           <div className="flex flex-wrap gap-2">
             {steps.map((step, i) => (
               <span
                 key={step}
-                className="border border-gray-200 rounded-lg px-3 py-1 text-xs text-gray-600"
+                className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-600"
               >
                 {i + 1}. {step}
               </span>

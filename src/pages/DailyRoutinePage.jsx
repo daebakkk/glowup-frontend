@@ -42,7 +42,7 @@ export default function DailyRoutinePage({ onHome }) {
         <span className="text-pink-500 text-sm font-medium">Daily Routine</span>
       </nav>
 
-      <div className="max-w-3xl mx-auto px-8 pb-16 space-y-5">
+      <div className="max-w-4xl mx-auto px-8 pb-16 space-y-6">
         <div className="text-center pt-2 pb-4">
           <div className="flex items-center justify-center gap-3 mb-2">
             <ClockHeaderIcon />
